@@ -65,21 +65,21 @@ app.put('/noticias/:id', (req, res) => {
 app.delete('/noticias/:id', (req, res) => {
     try {
         const id = parseInt(req.params.id, 10);
-        const data = fs.readFileSync('noticias.json', 'utf-8');
+        const data = fs.readFileSync('noticias.json', 'utf-8')
         const noticias = JSON.parse(data);
 
         if (id < 0 || id >= noticias.length) {
-            return res.status(404).json({ error: 'Noticia no encontrada' });
+            return res.status(404).json({ error: 'Noticia no encontrada' })
         }
 
         const noticiaEliminada = noticias.splice(id, 1);
 
-        fs.writeFileSync('noticias.json', JSON.stringify(noticias, null, 2));
+        fs.writeFileSync('noticias.json', JSON.stringify(noticias, null, 2))
 
-        res.json({ message: 'Noticia eliminada', noticia: noticiaEliminada });
+        res.json({ message: 'Noticia eliminada', noticia: noticiaEliminada })
     } catch (error) {
         console.error('Error al eliminar noticia:', error.message);
-        res.status(500).json({ error: 'Error al eliminar la noticia' });
+        res.status(500).json({ error: 'Error al eliminar la noticia' })
     }
 })
 
